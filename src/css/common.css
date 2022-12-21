@@ -16,3 +16,11 @@ img {
   display: block;
   max-width: 100%;
 }
+.btn {
+  opacity: 1;
+  visibility: hidden;
+}
+.btn-activ {
+  opacity: 1;
+  visibility: visible;
+}

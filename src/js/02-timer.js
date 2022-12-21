@@ -6,6 +6,13 @@ const input = document.querySelector('#datetime-picker');
 const btnStart = document.querySelector('[data-start]');
 const timer = document.querySelector('.timer');
 
+btnStart.insertAdjacentHTML(
+  'afterend',
+  `<button class="btn" type="button" data-clean>Clean</button>`
+);
+const btnClean = document.querySelector('[data-clean]');
+btnClean.addEventListener('click', onClickBtnCleanTimer);
+
 btnStart.disabled = true;
 let timerId = null;
 let inputDate = 0;
@@ -14,7 +21,7 @@ const options = {
   enableTime: true,
   time_24hr: true,
   defaultDate: new Date(),
-  minuteIncrement: 5,
+  minuteIncrement: 1,
   onClose(selectedDates) {
     inputDate = selectedDates[0].getTime();
     if (inputDate >= Date.now()) {
@@ -35,8 +42,8 @@ btnStart.addEventListener('click', onClickBtnStart);
 
 function onClickBtnStart() {
   btnStart.disabled = true;
+  btnClean.classList.replace('btn', 'btn-activ');
   timerId = setInterval(addTimer, 1000);
-  //   btnCleanTimer();
 }
 
 // console.log(qwe);
@@ -53,6 +60,7 @@ function addTimer() {
     countdown(convertMs(readout));
   } else {
     clearInterval(timerId);
+    btnClean.classList.replace('btn-activ', 'btn');
   }
 }
 
@@ -88,35 +96,26 @@ function convertMs(ms) {
   return { days, hours, minutes, seconds };
 }
 
-// function btnCleanTimer() {
-//   btnStart.insertAdjacentHTML(
-//     'afterend',
-//     `<button type="button" data-clean>Clean</button>`
-//   );
-//   const btnClean = document.querySelector('[data-clean]');
-//   btnClean.addEventListener('click', onClickBtnCleanTimer);
-// }
-
-// function onClickBtnCleanTimer() {
-//   input.value = '';
-//   clearInterval(timerId);
-//   timer.innerHTML = `<div class="timer">
-//         <div class="field">
-//           <span class="value" data-days>00</span>
-//           <span class="label">Days</span>
-//         </div>
-//         <div class="field">
-//           <span class="value" data-hours>00</span>
-//           <span class="label">Hours</span>
-//         </div>
-//         <div class="field">
-//           <span class="value" data-minutes>00</span>
-//           <span class="label">Minutes</span>
-//         </div>
-//         <div class="field">
-//           <span class="value" data-seconds>00</span>
-//           <span class="label">Seconds</span>
-//         </div>
-//       </div>`;
-//   btnClean.remove();
-// }
+function onClickBtnCleanTimer() {
+  input.value = '';
+  clearInterval(timerId);
+  timer.innerHTML = `<div class="timer">
+        <div class="field">
+          <span class="value" data-days>00</span>
+          <span class="label">Days</span>
+        </div>
+        <div class="field">
+          <span class="value" data-hours>00</span>
+          <span class="label">Hours</span>
+        </div>
+        <div class="field">
+          <span class="value" data-minutes>00</span>
+          <span class="label">Minutes</span>
+        </div>
+        <div class="field">
+          <span class="value" data-seconds>00</span>
+          <span class="label">Seconds</span>
+        </div>
+      </div>`;
+  btnClean.classList.replace('btn-activ', 'btn');
+}
