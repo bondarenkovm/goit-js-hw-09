@@ -36,7 +36,7 @@ btnStart.addEventListener('click', onClickBtnStart);
 function onClickBtnStart() {
   btnStart.disabled = true;
   timerId = setInterval(addTimer, 1000);
-  btnCleanTimer();
+  //   btnCleanTimer();
 }
 
 // console.log(qwe);
@@ -87,35 +87,36 @@ function convertMs(ms) {
 
   return { days, hours, minutes, seconds };
 }
-function btnCleanTimer() {
-  btnStart.insertAdjacentHTML(
-    'afterend',
-    `<button type="button" data-clean>Clean</button>`
-  );
-  const btnClean = document.querySelector('[data-clean]');
-  btnClean.addEventListener('click', onClickBtnCleanTimer);
-}
 
-function onClickBtnCleanTimer() {
-  input.value = '';
-  clearInterval(timerId);
-  timer.innerHTML = `<div class="timer">
-        <div class="field">
-          <span class="value" data-days>00</span>
-          <span class="label">Days</span>
-        </div>
-        <div class="field">
-          <span class="value" data-hours>00</span>
-          <span class="label">Hours</span>
-        </div>
-        <div class="field">
-          <span class="value" data-minutes>00</span>
-          <span class="label">Minutes</span>
-        </div>
-        <div class="field">
-          <span class="value" data-seconds>00</span>
-          <span class="label">Seconds</span>
-        </div>
-      </div>`;
-  btnClean.remove();
-}
+// function btnCleanTimer() {
+//   btnStart.insertAdjacentHTML(
+//     'afterend',
+//     `<button type="button" data-clean>Clean</button>`
+//   );
+//   const btnClean = document.querySelector('[data-clean]');
+//   btnClean.addEventListener('click', onClickBtnCleanTimer);
+// }
+
+// function onClickBtnCleanTimer() {
+//   input.value = '';
+//   clearInterval(timerId);
+//   timer.innerHTML = `<div class="timer">
+//         <div class="field">
+//           <span class="value" data-days>00</span>
+//           <span class="label">Days</span>
+//         </div>
+//         <div class="field">
+//           <span class="value" data-hours>00</span>
+//           <span class="label">Hours</span>
+//         </div>
+//         <div class="field">
+//           <span class="value" data-minutes>00</span>
+//           <span class="label">Minutes</span>
+//         </div>
+//         <div class="field">
+//           <span class="value" data-seconds>00</span>
+//           <span class="label">Seconds</span>
+//         </div>
+//       </div>`;
+//   btnClean.remove();
+// }
