@@ -4,7 +4,7 @@ import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
 const input = document.querySelector('#datetime-picker');
 const btnStart = document.querySelector('[data-start]');
-const timer = document.querySelector('.timer');
+// const timer = document.querySelector('.timer');
 
 btnStart.insertAdjacentHTML(
   'afterend',
@@ -43,6 +43,7 @@ btnStart.addEventListener('click', onClickBtnStart);
 function onClickBtnStart() {
   btnStart.disabled = true;
   btnClean.classList.replace('btn', 'btn-activ');
+  input.setAttribute('disabled', 'enabled');
   timerId = setInterval(addTimer, 1000);
 }
 
@@ -99,23 +100,28 @@ function convertMs(ms) {
 function onClickBtnCleanTimer() {
   input.value = '';
   clearInterval(timerId);
-  timer.innerHTML = `<div class="timer">
-        <div class="field">
-          <span class="value" data-days>00</span>
-          <span class="label">Days</span>
-        </div>
-        <div class="field">
-          <span class="value" data-hours>00</span>
-          <span class="label">Hours</span>
-        </div>
-        <div class="field">
-          <span class="value" data-minutes>00</span>
-          <span class="label">Minutes</span>
-        </div>
-        <div class="field">
-          <span class="value" data-seconds>00</span>
-          <span class="label">Seconds</span>
-        </div>
-      </div>`;
+  document.querySelector('[data-days]').textContent = `00`;
+  document.querySelector('[data-hours]').textContent = `00`;
+  document.querySelector('[data-minutes]').textContent = `00`;
+  document.querySelector('[data-seconds]').textContent = `00`;
+  input.removeAttribute('disabled');
+  // timer.innerHTML = `<div class="timer">
+  //       <div class="field">
+  //         <span class="value" data-days>00</span>
+  //         <span class="label">Days</span>
+  //       </div>
+  //       <div class="field">
+  //         <span class="value" data-hours>00</span>
+  //         <span class="label">Hours</span>
+  //       </div>
+  //       <div class="field">
+  //         <span class="value" data-minutes>00</span>
+  //         <span class="label">Minutes</span>
+  //       </div>
+  //       <div class="field">
+  //         <span class="value" data-seconds>00</span>
+  //         <span class="label">Seconds</span>
+  //       </div>
+  //     </div>`;
   btnClean.classList.replace('btn-activ', 'btn');
 }
